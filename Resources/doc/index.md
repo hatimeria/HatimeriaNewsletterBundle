@@ -116,6 +116,7 @@ You configure schedule types so the --type command option is specified by you.
 To enable simple mailing you must configure recipeint_provider service implementing `MailingRecipientsProviderInterface`
 
 For example:
+
 ``` php
 <?php
 
@@ -131,7 +132,7 @@ class UserManager implements MailingRecipientProviderInterface
     }
     
 }
-```
+```s
 
 Class must be configured as a dependency injection service.
 
