@@ -10,6 +10,8 @@ use Hatimeria\NewsletterBundle\Mailing\SimpleMailing,
 class MailingManager extends ContainerAware implements MailingManagerInterface
 {
     /**
+     * Gets list of mailing services
+     *
      * @throws \InvalidArgumentException
      * @return array
      */
@@ -19,7 +21,8 @@ class MailingManager extends ContainerAware implements MailingManagerInterface
 
         $services     = $this->getSimpleMailingServices();
         $userServices = $container->getParameter('hatimeria_newsletter.mailing_services');
-        
+
+        // user specified mailing services are merged with simple mailing services
         foreach ($userServices as $name) {
             $service = $container->get($name);
 
@@ -34,11 +37,14 @@ class MailingManager extends ContainerAware implements MailingManagerInterface
     }
 
     /**
+     * Creates collection of SimpleMailing services
+     *
      * @return array
      */
     protected function getSimpleMailingServices()
     {
         $container = $this->container;
+        // if we want to send simple mailing, we must provide recipient provider service in bundle configuration
         if (!$container->has('hatimeria_newsletter.recipient_provider')) {
             return array();
         }
@@ -53,6 +59,7 @@ class MailingManager extends ContainerAware implements MailingManagerInterface
         foreach ($er->findMailingToSend() as $mailing) {
             $service = new SimpleMailing($mailing);
             $service->setRecipientProvider($recipientProvider);
+            $service->setContainer($this->container);
 
             $services[] = $service;
         }

@@ -6,6 +6,12 @@ use Doctrine\ORM\EntityRepository;
 
 class QueueRepository extends EntityRepository
 {
+    /**
+     * Select part of records to send from queue table
+     *
+     * @param int $limit
+     * @return array
+     */
     public function findPacket($limit = null)
     {
         $query = $this->createQueryBuilder('e');

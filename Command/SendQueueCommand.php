@@ -13,8 +13,16 @@ use Hatimeria\NewsletterBundle\Entity\Queue,
 
 class SendQueueCommand extends ContainerAwareCommand
 {
+    /**
+     * @var string
+     */
     protected $sender;
 
+    /**
+     * Command configuration
+     *
+     * @return void
+     */
     protected function configure()
     {
         parent::configure();
@@ -23,6 +31,13 @@ class SendQueueCommand extends ContainerAwareCommand
              ->setDescription('Sends messages from queue');
     }
 
+    /**
+     * Command execution
+     * 
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @return void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->sender = $this->getContainer()->getParameter('hatimeria_newsletter.sender');
@@ -48,6 +63,8 @@ class SendQueueCommand extends ContainerAwareCommand
     }
 
     /**
+     * Creates message from Queue object
+     *
      * @param \Hatimeria\NewsletterBundle\Entity\Queue $queue
      * 
      * @return \Swift_Message

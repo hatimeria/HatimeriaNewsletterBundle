@@ -12,7 +12,12 @@ use Hatimeria\NewsletterBundle\Entity\Queue,
     Hatimeria\NewsletterBundle\Recipient\MailingRecipientInterface;
 
 class PrepareMailingCommand extends ContainerAwareCommand {
-    
+
+    /**
+     * Command configuration
+     * 
+     * @return void
+     */
     protected function configure()
     {
         parent::configure();
@@ -24,6 +29,14 @@ class PrepareMailingCommand extends ContainerAwareCommand {
              ));
     }
 
+    /**
+     * Command execution
+     *
+     * @throws \InvalidArgumentException
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @return void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $type = $input->getOption('type');
@@ -58,8 +71,10 @@ class PrepareMailingCommand extends ContainerAwareCommand {
 
                 $em->persist($queue);
             }
-            
+
             $em->flush();
+
+            $service->finalize();
         }
     }
     
