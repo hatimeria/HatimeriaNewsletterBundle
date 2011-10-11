@@ -7,6 +7,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
+    /**
+     * Generates configuration for bundle
+     *
+     * @return TreeBuilder
+     */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
@@ -14,7 +19,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                //->booleanNode('use_controller')->defaultTrue()->end()
+                ->scalarNode('sender')->isRequired()->end()
                 ->scalarNode('recipient_provider')->defaultNull()->end()
                 ->scalarNode('manager')->defaultValue('hatimeria_newsletter.manager.default')->end()
                 ->arrayNode('mailing_services')

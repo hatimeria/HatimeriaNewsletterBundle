@@ -2,12 +2,18 @@
 
 namespace Hatimeria\NewsletterBundle\Mailing;
 
-use \Hatimeria\NewsletterBundle\Entity\Mailing;
+use Hatimeria\NewsletterBundle\Entity\Mailing,
+    Hatimeria\NewsletterBundle\Recipient\MailingRecipientsProviderInterface;
 
 class SimpleMailing implements MailingInterface
 {
+    /**
+     * @var \Hatimeria\NewsletterBundle\Entity\Mailing
+     */
     protected $mailing;
-
+    /**
+     * @var \Hatimeria\NewsletterBundle\Recipient\MailingRecipientsProviderInterface
+     */
     protected $recipientProvider;
 
     public function __construct(Mailing $mailing)
@@ -17,27 +23,31 @@ class SimpleMailing implements MailingInterface
 
     public function getRecipients()
     {
-        //@todo using recipient provider
+        if (null === $this->recipientProvider) {
+            throw new \InvalidArgumentException('You must provide MailingRecipientsProvider to be able to retrieve recipients');
+        }
+
+        return $this->recipientProvider->findRecipients();
     }
 
-    public function setRecipientProvider($provider)
+    public function setRecipientProvider(MailingRecipientsProviderInterface $provider)
     {
         $this->recipientProvider = $provider;
     }
 
-    public function getName()
-    {
-        return 'simple_mailing';
-    }
-
     public function getBody($recipient)
     {
-        
+        return $this->mailing->getBody();
     }
 
     public function getSubject($recipient)
     {
-        
+        return $this->mailing->getSubject();
     }
 
+    public function supportsSchedule($type)
+    {
+        return $type == 'default';
+    }
+    
 }

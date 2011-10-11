@@ -20,13 +20,12 @@ class HatimeriaNewsletterExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
-        $services = $config['mailing_services'];
-
         if (null !== $config['recipient_provider']) {
             $container->setAlias('hatimeria_newsletter.recipient_provider', $config['recipient_provider']);
         }
         $container->setAlias('hatimeria_newsletter.manager', $config['manager']);
-        $container->setParameter('hatimeria_newsletter.mailing_services', $services);
+        $container->setParameter('hatimeria_newsletter.mailing_services', $config['mailing_services']);
+        $container->setParameter('hatimeria_newsletter.sender', $config['sender']);
     }
     
 }

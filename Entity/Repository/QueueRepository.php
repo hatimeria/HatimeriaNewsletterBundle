@@ -1,6 +1,6 @@
 <?php
 
-namespace Hatimeria\NewsletterBundle\Entity;
+namespace Hatimeria\NewsletterBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

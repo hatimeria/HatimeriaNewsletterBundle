@@ -45,7 +45,7 @@ class MailingManager extends ContainerAware implements MailingManagerInterface
         $recipientProvider = $container->get('hatimeria_newsletter.recipient_provider');
         
         /* @var \Doctrine\ORM\EntityManager $em */
-        /* @var \Hatimeria\NewsletterBundle\Entity\MailingRepository $er */
+        /* @var \Hatimeria\NewsletterBundle\Entity\Repository\MailingRepository $er */
         $em = $this->container->get('doctrine.orm.entity_manager');
         $er = $em->getRepository('HatimeriaNewsletterBundle:Mailing');
 

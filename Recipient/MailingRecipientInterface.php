@@ -4,6 +4,12 @@ namespace Hatimeria\NewsletterBundle\Recipient;
 
 interface MailingRecipientInterface
 {
-    public function getEmail();
+    /**
+     * Gets the user email address
+     *
+     * @abstract
+     * @return void
+     */
+    function getEmail();
     
 }

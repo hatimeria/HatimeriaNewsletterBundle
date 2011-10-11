@@ -18,11 +18,16 @@ class PrepareMailingCommand extends ContainerAwareCommand {
         parent::configure();
 
         $this->setName('hatimeria:newsletter:prepare_mailing')
-             ->setDescription('Creates mailing queue from mailing services');
+             ->setDescription('Creates mailing queue from mailing services')
+             ->setDefinition(array(
+                new InputOption('type', null, InputOption::VALUE_OPTIONAL, 'Schedule type', 'default'),
+             ));
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $type = $input->getOption('type');
+
         /* @var \Hatimeria\NewsletterBundle\Mailing\MailingManagerInterface $manager */
         /* @var \Doctrine\ORM\EntityManager $em */
         $manager = $this->getContainer()->get('hatimeria_newsletter.manager');
@@ -30,8 +35,7 @@ class PrepareMailingCommand extends ContainerAwareCommand {
 
         foreach ($manager->getServices() as $service) {
             /* @var \Hatimeria\NewsletterBundle\Mailing\MailingInterface $service */
-            // @todo check if we should send that message
-            if (!$service) {
+            if (!$service->supportsSchedule($type)) {
                 continue;
             }
             foreach ($service->getRecipients() as $recipient) {

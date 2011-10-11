@@ -29,7 +29,7 @@ class SendQueueCommand extends ContainerAwareCommand
 
         /* @var \Doctrine\ORM\EntityManager $em */
         /* @var \Swift_Mailer $mailer */
-        /* @var \Hatimeria\NewsletterBundle\Entity\QueueRepository $queue */
+        /* @var \Hatimeria\NewsletterBundle\Entity\Repository\QueueRepository $queue */
         $em     = $this->getContainer()->get('doctrine.orm.entity_manager');
         $mailer = $this->getContainer()->get('mailer');
         $queue  = $em->getRepository('HatimeriaNewsletterBundle:Queue');
