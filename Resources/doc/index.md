@@ -146,6 +146,7 @@ hatimeria_newsletter:
 ```
 
 **Note:**
+
 > Your recipient_provider class can return collection of email addresses strings or
 > collection of objects implementing `MailingRecipientInterface`
 
