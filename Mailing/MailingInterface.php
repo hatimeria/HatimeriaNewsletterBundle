@@ -4,7 +4,7 @@ namespace Hatimeria\NewsletterBundle\Mailing;
 
 interface MailingInterface
 {
-    public function getRecipients();
+    public function getRecipients($scheduleType);
 
     public function getBody($recipient);
 

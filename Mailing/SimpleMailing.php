@@ -21,7 +21,7 @@ class SimpleMailing implements MailingInterface
         $this->mailing = $mailing;
     }
 
-    public function getRecipients()
+    public function getRecipients($scheduleType)
     {
         if (null === $this->recipientProvider) {
             throw new \InvalidArgumentException('You must provide MailingRecipientsProvider to be able to retrieve recipients');

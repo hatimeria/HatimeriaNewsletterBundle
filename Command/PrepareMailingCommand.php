@@ -38,7 +38,7 @@ class PrepareMailingCommand extends ContainerAwareCommand {
             if (!$service->supportsSchedule($type)) {
                 continue;
             }
-            foreach ($service->getRecipients() as $recipient) {
+            foreach ($service->getRecipients($type) as $recipient) {
                 if (is_object($recipient) && ($recipient instanceof MailingRecipientInterface)) {
                     /* @var \Hatimeria\NewsletterBundle\Recipient\MailingRecipientInterface $recipient */
                     $email = $recipient->getEmail();
