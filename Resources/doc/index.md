@@ -132,7 +132,7 @@ class UserManager implements MailingRecipientProviderInterface
     }
     
 }
-```s
+```
 
 Class must be configured as a dependency injection service.
 
