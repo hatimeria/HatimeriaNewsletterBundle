@@ -70,7 +70,7 @@ class SimpleMailing implements MailingInterface, ContainerAwareInterface
      * @param $recipient
      * @return string
      */
-    public function getBody($recipient)
+    public function getBody($recipient, $scheduleType)
     {
         return $this->mailing->getBody();
     }

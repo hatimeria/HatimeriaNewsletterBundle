@@ -111,5 +111,4 @@ class Mailing
     {
         return $this->createdAt;
     }
-
 }
