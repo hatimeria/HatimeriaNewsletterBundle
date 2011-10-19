@@ -24,7 +24,7 @@ interface MailingInterface
      * @param mixed $recipient
      * @return void
      */
-    public function getBody($recipient);
+    public function getBody($recipient, $scheduleType);
     /**
      * Gets subject of mailing.
      *

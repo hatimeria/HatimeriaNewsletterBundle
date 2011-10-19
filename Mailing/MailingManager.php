@@ -21,7 +21,7 @@ class MailingManager extends ContainerAware implements MailingManagerInterface
 
         $services     = $this->getSimpleMailingServices();
         $userServices = $container->getParameter('hatimeria_newsletter.mailing_services');
-
+        
         // user specified mailing services are merged with simple mailing services
         foreach ($userServices as $name) {
             $service = $container->get($name);
@@ -32,7 +32,7 @@ class MailingManager extends ContainerAware implements MailingManagerInterface
 
             $services[] = $service;
         }
-
+        
         return $services;
     }
 

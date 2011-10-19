@@ -66,7 +66,7 @@ class PrepareMailingCommand extends ContainerAwareCommand {
 
                 $queue = new Queue();
                 $queue->setEmail($email);
-                $queue->setBody($service->getBody($recipient));
+                $queue->setBody($service->getBody($recipient, $type));
                 $queue->setSubject($service->getSubject($recipient));
 
                 $em->persist($queue);
