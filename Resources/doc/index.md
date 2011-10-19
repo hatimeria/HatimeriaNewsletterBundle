@@ -128,7 +128,7 @@ class UserManager implements MailingRecipientProviderInterface
 {
     public function findRecipients()
     {
-        reutnr array('user1@test.com', 'user2@test.com');
+        return array('user1@test.com', 'user2@test.com');
     }
     
 }
@@ -209,7 +209,7 @@ class NewsMailing implements MailingInterface
      */
     public function getBody($recipient)
     {
-        return $this->templating->render('::newsletter.html.twig', array('recipient' => $recipient))
+        return $this->templating->render('::newsletter.html.twig', array('recipient' => $recipient));
     }
     
     /**
