@@ -209,7 +209,7 @@ class NewsMailing implements MailingInterface
      */
     public function getBody($recipient)
     {
-        return $this->templating->render('::newsletter.html.twig', array('recipient' => $recipient))
+        return $this->templating->render('::newsletter.html.twig', array('recipient' => $recipient));
     }
     
     /**
