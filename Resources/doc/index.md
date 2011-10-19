@@ -128,7 +128,7 @@ class UserManager implements MailingRecipientProviderInterface
 {
     public function findRecipients()
     {
-        reutnr array('user1@test.com', 'user2@test.com');
+        return array('user1@test.com', 'user2@test.com');
     }
     
 }
