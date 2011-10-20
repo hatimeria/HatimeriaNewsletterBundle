@@ -75,7 +75,7 @@ class SendQueueCommand extends ContainerAwareCommand
                     ->setSubject($queue->getSubject())
                     ->setFrom($this->sender)
                     ->setTo($queue->getEmail())
-                    ->setBody($queue->getBody());
+                    ->setBody($queue->getBody(), 'text/html');
 
         return $message;
     }
