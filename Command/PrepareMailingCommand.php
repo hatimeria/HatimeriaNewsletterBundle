@@ -64,9 +64,14 @@ class PrepareMailingCommand extends ContainerAwareCommand {
                     throw new \InvalidArgumentException($msg);
                 }
 
+                $body = $service->getBody($recipient, $type);
+                if (false === $body) {
+                    continue;
+                }
+                
                 $queue = new Queue();
                 $queue->setEmail($email);
-                $queue->setBody($service->getBody($recipient, $type));
+                $queue->setBody($body);
                 $queue->setSubject($service->getSubject($recipient));
 
                 $em->persist($queue);

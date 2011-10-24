@@ -17,11 +17,13 @@ interface MailingInterface
     public function getRecipients($scheduleType);
     /**
      * Gets body of mailing.
+     * If returns (false) than no email is added to queue
      *
      * Recipient is provided for more complex body generation
      *
      * @abstract
      * @param mixed $recipient
+     * @param mixed $scheduleType
      * @return void
      */
     public function getBody($recipient, $scheduleType);
