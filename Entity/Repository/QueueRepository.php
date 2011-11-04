@@ -15,6 +15,7 @@ class QueueRepository extends EntityRepository
     public function findPacket($limit = null)
     {
         $query = $this->createQueryBuilder('e');
+        $query->andWhere("e.sent != 1");
 
         if (null !== $limit) {
             $query->setMaxResults((int) $limit);
