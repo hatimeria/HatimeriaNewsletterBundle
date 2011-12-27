@@ -8,10 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
     Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface;
 
+use Hatimeria\FrameworkBundle\Command\Base\Command;
+
 use Hatimeria\NewsletterBundle\Entity\Queue,
     Hatimeria\NewsletterBundle\Recipient\MailingRecipientInterface;
 
-class PrepareMailingCommand extends ContainerAwareCommand {
+class PrepareMailingCommand extends Command {
 
     /**
      * Command configuration
@@ -40,7 +42,7 @@ class PrepareMailingCommand extends ContainerAwareCommand {
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $type = $input->getOption('type');
-
+        
         /* @var \Hatimeria\NewsletterBundle\Mailing\MailingManagerInterface $manager */
         /* @var \Doctrine\ORM\EntityManager $em */
         $manager = $this->getContainer()->get('hatimeria_newsletter.manager');
@@ -73,7 +75,7 @@ class PrepareMailingCommand extends ContainerAwareCommand {
                 $queue->setEmail($email);
                 $queue->setBody($body);
                 $queue->setSubject($service->getSubject($recipient));
-
+                
                 $em->persist($queue);
             }
 
