@@ -8,7 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand,
     Symfony\Component\Console\Input\InputInterface,
     Symfony\Component\Console\Output\OutputInterface;
 
-use Hatimeria\FrameworkBundle\Command\Base\Command;
+use Hatimeria\FrameworkBundle\Command\Base\Command,
+    Hatimeria\FrameworkBundle\Utils\Url as UrlUtils;
 
 use Hatimeria\NewsletterBundle\Entity\Queue,
     Hatimeria\NewsletterBundle\Recipient\MailingRecipientInterface;
@@ -70,6 +71,12 @@ class PrepareMailingCommand extends Command {
                 if (false === $body) {
                     continue;
                 }
+                if($this->getContainer()->hasParameter("base_url")) {
+                    $domain = $this->getContainer()->getParameter("base_url");
+                } else {
+                    $domain = '';
+                }
+                $body = UrlUtils::domenizeImages($body, $domain);
                 
                 $queue = new Queue();
                 $queue->setEmail($email);
