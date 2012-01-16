@@ -2,6 +2,8 @@
 
 namespace Hatimeria\NewsletterBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Mailing object
  */
@@ -12,10 +14,12 @@ class Mailing
      */
     protected $id;
     /**
+     * @Assert\NotBlank(message="To pole jest wymagane")
      * @var string
      */
     protected $subject;
     /**
+     * @Assert\NotBlank(message="To pole jest wymagane")
      * @var string
      */
     protected $body;
