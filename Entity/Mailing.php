@@ -14,12 +14,12 @@ class Mailing
      */
     protected $id;
     /**
-     * @Assert\NotBlank(message="To pole jest wymagane")
+     * @Assert\NotBlank()
      * @var string
      */
     protected $subject;
     /**
-     * @Assert\NotBlank(message="To pole jest wymagane")
+     * @Assert\NotBlank()
      * @var string
      */
     protected $body;
