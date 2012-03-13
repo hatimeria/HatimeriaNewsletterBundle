@@ -28,7 +28,10 @@ class SendQueueCommand extends ContainerAwareCommand
         parent::configure();
 
         $this->setName('hatimeria:newsletter:send_queue')
-             ->setDescription('Sends messages from queue');
+             ->setDescription('Sends messages from queue')
+            ->setDefinition(array(
+                new InputOption('limit', null, InputOption::VALUE_OPTIONAL, 'How many records should be selected in one execute', null)
+            ));
     }
 
     /**
@@ -40,6 +43,10 @@ class SendQueueCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $limit = $input->getOption('limit');
+        if (null !== $limit) {
+            $limit = (int)$limit;
+        }
         $this->sender = $this->getContainer()->getParameter('hatimeria_newsletter.sender');
 
         /* @var \Doctrine\ORM\EntityManager $em */
@@ -49,8 +56,7 @@ class SendQueueCommand extends ContainerAwareCommand
         $mailer = $this->getContainer()->get('mailer');
         $queue  = $em->getRepository('HatimeriaNewsletterBundle:Queue');
 
-        //@todo use limit 
-        foreach ($queue->findPacket() as $mail) {
+        foreach ($queue->findPacket($limit) as $mail) {
             /* @var \Hatimeria\NewsletterBundle\Entity\Queue $mail */
             $message = $this->createMessageFromQueue($mail);
             $mailer->send($message);
